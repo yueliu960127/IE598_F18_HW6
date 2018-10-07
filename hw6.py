@@ -32,24 +32,24 @@ for i in range(1,11):
 print('\nin-sample accuracy score: %.3f +/- %.3f'%(np.mean(treescores_in),np.std(treescores_in)))
 print('\nout-of-sample accuracy score: %.3f +/- %.3f'%(np.mean(treescores_out),np.std(treescores_out)))
 
-#k_fold_accu = []
-#from sklearn.decomposition import PCA
-#from sklearn.linear_model import LogisticRegression
-#from sklearn.pipeline import make_pipeline
-#from sklearn import metrics
-#
-#for i in range(1,11):
-#    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.1, random_state = i, stratify = y)
-#    pipe_lr = make_pipeline(StandardScaler(),PCA(n_components=2),LogisticRegression(random_state=1))
-#    pipe_lr.fit(X_train, y_train)
-#    y_pred = pipe_lr.predict(X_test)
-#    k_fold_accu.append(metrics.accuracy_score(y_test, y_pred))
-#print(k_fold_accu)
-#
-#from sklearn.model_selection import cross_val_score
-#scores = cross_val_score(estimator=pipe_lr,X=X_train,y=y_train,cv=10,n_jobs=1)
-#print(scores)
-#print('\nCV accuracy: %.3f +/- %.3f' %(np.mean(scores), np.std(scores)))
+k_fold_accu = []
+from sklearn.decomposition import PCA
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
+from sklearn import metrics
+
+for i in range(1,11):
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.1, random_state = i, stratify = y)
+    pipe_lr = make_pipeline(StandardScaler(),PCA(n_components=2),LogisticRegression(random_state=1))
+    pipe_lr.fit(X_train, y_train)
+    y_pred = pipe_lr.predict(X_test)
+    k_fold_accu.append(metrics.accuracy_score(y_test, y_pred))
+print(k_fold_accu)
+
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(estimator=pipe_lr,X=X_train,y=y_train,cv=10,n_jobs=1)
+print(scores)
+print('\nCV accuracy: %.3f +/- %.3f' %(np.mean(scores), np.std(scores)))
 
 
 
